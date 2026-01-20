@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Utensils, Shirt, Droplet, Leaf, BookOpen } from "lucide-react"
 
@@ -50,6 +52,7 @@ export function DonationsRequired() {
             const Icon = donation.icon
             return (
               <Button
+                onClick={() => document.getElementById("donate")?.scrollIntoView({ behavior: "smooth" })}
                 key={donation.id}
                 variant="outline"
                 className="h-auto p-6 flex flex-col items-center justify-center gap-4 hover:bg-primary hover:text-primary-foreground border-2 hover:border-primary transition-all bg-transparent"

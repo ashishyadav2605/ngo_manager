@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link"
 
 const volunteers = [
   { id: 1, name: "Sarah Johnson", age: 28, image: "/woman-volunteer-portrait.png" },
@@ -19,7 +20,7 @@ export function VolunteersSection() {
   const prev = () => setCurrent((prev) => (prev - 1 + volunteers.length) % volunteers.length)
 
   return (
-    <section className="py-16 bg-secondary/30">
+    <section id="join" className="py-16 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">Top Volunteers of the Week</h2>
@@ -70,9 +71,11 @@ export function VolunteersSection() {
         </div>
 
         <div className="text-center mt-12">
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            Be the Next Volunteer
-          </Button>
+          <Link href="/signup">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              Be the Next Volunteer
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,9 +1,12 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Heart } from "lucide-react"
+import Link from "next/link"
 
 export function DonationRequest() {
   return (
-    <section className="py-16 bg-gradient-to-r from-primary to-accent text-primary-foreground">
+    <section id="donate" className="py-16 bg-gradient-to-r from-primary to-accent text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="flex justify-center mb-6">
@@ -19,16 +22,19 @@ export function DonationRequest() {
               size="lg"
               variant="secondary"
               className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              onClick={() => alert("Redirecting to payment gateway...")}
             >
               Donate Now
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
-            >
-              Learn More
-            </Button>
+            <Link href="#about">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
+              >
+                Learn More
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

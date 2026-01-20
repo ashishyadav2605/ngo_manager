@@ -3,10 +3,28 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [user, setUser] = useState<any>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user")
+    if (userData) {
+      setUser(JSON.parse(userData))
+    }
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    setUser(null)
+    router.push("/")
+    router.refresh()
+  }
 
   const navLinks = [
     { href: "#", label: "Home" },
@@ -44,9 +62,20 @@ export function Navbar() {
 
           {/* Login Button */}
           <div className="flex items-center gap-4">
-            <Button variant="outline" className="hidden sm:flex bg-transparent" size="sm">
-              Login
-            </Button>
+            {user ? (
+              <div className="hidden sm:flex items-center gap-4">
+                <span className="text-sm font-medium">Hi, {user.name}</span>
+                <Button variant="outline" onClick={handleLogout} className="bg-transparent" size="sm">
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Link href="/login">
+                <Button variant="outline" className="hidden sm:flex bg-transparent" size="sm">
+                  Login
+                </Button>
+              </Link>
+            )}
 
             {/* Mobile menu button */}
             <button
@@ -72,7 +101,18 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Button className="w-full mt-2">Login</Button>
+              {user ? (
+                <>
+                  <div className="px-3 py-2 text-sm font-medium text-foreground">Hi, {user.name}</div>
+                  <Button onClick={handleLogout} className="w-full mt-2">
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Link href="/login" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full mt-2">Login</Button>
+                </Link>
+              )}
             </div>
           </div>
         )}

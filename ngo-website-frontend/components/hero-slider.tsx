@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -61,12 +62,16 @@ export function HeroSlider() {
 
       {/* Left Content - Buttons on left side for desktop */}
       <div className="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 flex-col gap-4 z-10">
-        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-          Join Us
-        </Button>
-        <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20 bg-transparent">
-          Donate Now
-        </Button>
+        <Link href="#join">
+          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
+            Join Us
+          </Button>
+        </Link>
+        <Link href="#donate">
+          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20 bg-transparent w-full">
+            Donate Now
+          </Button>
+        </Link>
       </div>
 
       {/* Navigation Arrows */}
